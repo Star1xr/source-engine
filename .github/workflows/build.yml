@@ -29,6 +29,12 @@ jobs:
     - name: Build android-armv7a
       run: |
         scripts/build-android-armv7a.sh
+    - name: Upload Android build
+      uses: actions/upload-artifact@v3
+      with:
+        name: android-armv7a-build
+        path: android-armv7a-build.zip
+        retention-days: 30
 
   build-windows-i386:
     runs-on: windows-2019
