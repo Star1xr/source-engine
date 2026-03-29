@@ -6,6 +6,8 @@ jobs:
 
   build-android-armv7a:
     runs-on: ubuntu-latest
+    permissions: 
+     contents: write
 
     steps:
     - uses: actions/checkout@v2
@@ -17,6 +19,16 @@ jobs:
       with:
         name: android-armv7a-build
         path: android-armv7a-build.zip
+    - name: release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: android-armv7a-build.zip
+        body: "automated release"
+        draft: false
+        env:
+        GITHUB_TOKEN: $
+         {{ secrets.GITHUB_TOKEN }} # just a placeholder! dont put token on the secrets.
+         
 
   build-linux-i386:
     runs-on: ubuntu-latest
