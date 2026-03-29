@@ -34,7 +34,6 @@ jobs:
       with:
         name: android-armv7a-build
         path: android-armv7a-build.zip
-        retention-days: 30
 
   build-windows-i386:
     runs-on: windows-2019
