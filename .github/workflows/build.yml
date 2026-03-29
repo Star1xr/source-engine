@@ -23,7 +23,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          files:
+          files: android-armv7a-build.zip
           tag_name: ${{ github.ref_name }}   
           draft: true
           prerelease: false #  tokens just a placeholder! dont put token on the secrets.
