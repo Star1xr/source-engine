@@ -22,7 +22,7 @@ jobs:
     - name: release
       uses: softprops/action-gh-release@v1
       with:
-          body: initial release
+          body: "initial release"
           token: ${{ secrets.GITHUB_TOKEN }}
           files: android-armv7a-build.zip
           tag_name: ${{ github.ref_name }}
