@@ -22,12 +22,11 @@ jobs:
     - name: release
       uses: softprops/action-gh-release@v1
       with:
-        files: android-armv7a-build.zip
-        body: "automated release"
-        draft: false
-        env:
-        GITHUB_TOKEN: $
-         {{ secrets.GITHUB_TOKEN }} # just a placeholder! dont put token on the secrets.
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files:
+          tag_name: ${{ github.ref_name }}   
+          draft: true
+          prerelease: false #  tokens just a placeholder! dont put token on the secrets.
          
 
   build-linux-i386:
