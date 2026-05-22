@@ -93,6 +93,10 @@ void GamepadUI::Shutdown()
     if ( m_pBasePanel )
         m_pBasePanel->DeletePanel();
 
+    if ( m_pAnimationController )
+        delete m_pAnimationController;
+    m_pAnimationController = NULL;
+
 #ifdef HL2_RETAIL // not necessary on SDK2013 (Madi)
     m_SteamAPIContext.Clear();
 #endif
@@ -116,8 +120,10 @@ void GamepadUI::OnLevelInitializePreEntity()
 
 void GamepadUI::OnLevelInitializePostEntity()
 {
-    m_pBasePanel->OnMenuStateChanged();
-    GetMainMenu()->OnMenuStateChanged();
+    if ( m_pBasePanel )
+        m_pBasePanel->OnMenuStateChanged();
+    if ( GetMainMenu() )
+        GetMainMenu()->OnMenuStateChanged();
 }
 
 void GamepadUI::OnLevelShutdown()
@@ -128,12 +134,17 @@ void GamepadUI::OnLevelShutdown()
         m_pAnimationController->RunAllAnimationsToCompletion();
     }
 
-    m_pBasePanel->OnMenuStateChanged();
-    GetMainMenu()->OnMenuStateChanged();
+    if ( m_pBasePanel )
+        m_pBasePanel->OnMenuStateChanged();
+    if ( GetMainMenu() )
+        GetMainMenu()->OnMenuStateChanged();
 }
 
 void GamepadUI::VidInit()
 {
+    if ( !m_pBasePanel )
+        return;
+
     int w, h;
     vgui::surface()->GetScreenSize( w, h );
 
